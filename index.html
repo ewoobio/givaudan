@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Givaudan S&T — 향에 담긴 과학</title>
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  background: #faf9f7;
+  color: #1a1a1a;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  background: #0a1628;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(45,122,106,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(61,90,158,0.15) 0%, transparent 70%),
+    linear-gradient(160deg, #0a1628 0%, #0f1f3a 100%);
+}
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.4;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 760px;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(45,122,106,0.25);
+  border: 1px solid rgba(45,122,106,0.5);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(45,200,160,0.9);
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-size: clamp(36px, 7vw, 68px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.hero-title em {
+  font-style: normal;
+  background: linear-gradient(90deg, #4ecba8, #6b9fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.hero-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.35);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  margin-top: 16px;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.35; transform: scaleY(1); }
+  50% { opacity: 0.7; transform: scaleY(1.2); }
+}
+.hero-collab {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   SECTION WRAPPER
+   ============================================================ */
+.section {
+  padding: 80px 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: #e8e4df;
+}
+
+/* ============================================================
+   OVERVIEW — 6 기술 카드 그리드
+   ============================================================ */
+.overview {
+  background: #f5f2ed;
+  padding: 72px 24px;
+}
+.overview-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 12px;
+}
+.section-headline {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+.section-lead {
+  font-size: 15px;
+  color: #666;
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 700px) {
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 460px) {
+  .tech-grid { grid-template-columns: 1fr; }
+}
+
+.tech-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 5/4;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tech-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.tc-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.4s ease;
+}
+.tech-card:hover .tc-bg { transform: scale(1.04); }
+
+.tc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+}
+
+.tc-body {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 18px 20px;
+  color: #fff;
+}
+.tc-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.tc-name {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.tc-cat {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 5px;
+}
+.tc-claim {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+  font-weight: 500;
+}
+.tc-arrow {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  transition: background 0.2s;
+}
+.tech-card:hover .tc-arrow {
+  background: rgba(255,255,255,0.22);
+}
+
+/* card bg colors */
+.bg-viva    { background: linear-gradient(150deg, #2d7a6a 0%, #1a4a3e 100%); }
+.bg-scalp   { background: linear-gradient(150deg, #2a6e8e 0%, #154a5e 100%); }
+.bg-dream   { background: linear-gradient(150deg, #3d4e9e 0%, #202e68 100%); }
+.bg-zap     { background: linear-gradient(150deg, #c08030 0%, #7a4a08 100%); }
+.bg-geo     { background: linear-gradient(150deg, #8a4a2a 0%, #5a2c10 100%); }
+.bg-phyto   { background: linear-gradient(150deg, #3a7a3a 0%, #1e4a1e 100%); }
+
+/* ============================================================
+   TECH MAP 배너 (기술 위계 시각화)
+   ============================================================ */
+.map-section {
+  background: #0a1628;
+  padding: 64px 24px;
+}
+.map-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.map-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 12px;
+}
+.map-title {
+  font-size: clamp(22px, 3.5vw, 34px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.map-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 48px;
+  max-width: 520px;
+}
+.map-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .map-stages { grid-template-columns: 1fr; }
+}
+.map-stage {
+  padding: 28px 24px;
+  position: relative;
+}
+.ms-1 { background: rgba(255,255,255,0.04); }
+.ms-2 { background: rgba(255,255,255,0.07); }
+.ms-3 { background: rgba(255,255,255,0.11); }
+.map-num {
+  font-size: 42px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.map-stage-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.map-stage-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.map-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.map-chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+}
+.map-footer {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.06);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   기술 상세 섹션 공통
+   ============================================================ */
+.tech-section {
+  padding: 96px 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.tech-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin-bottom: 56px;
+  align-items: start;
+}
+@media (max-width: 680px) {
+  .tech-header { grid-template-columns: 1fr; gap: 28px; }
+}
+.th-left {}
+.th-cat {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: #f0ede8;
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #888;
+  margin-bottom: 14px;
+}
+.th-name {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: 12px;
+}
+.th-tagline {
+  font-size: 14px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.th-right {
+  padding-top: 4px;
+}
+.th-summary {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* 지표 카드들 */
+.stat-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.stat-card {
+  flex: 1;
+  min-width: 140px;
+  background: #f5f2ed;
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* 서브 콘텐츠 공통 */
+.content-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+@media (max-width: 680px) {
+  .content-block { grid-template-columns: 1fr; }
+}
+.content-card {
+  background: #f5f2ed;
+  border-radius: 16px;
+  padding: 24px;
+}
+.cc-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cc-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.cc-body {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* 검증 3단계 블록 */
+.verify-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+@media (max-width: 600px) {
+  .verify-row { grid-template-columns: 1fr; }
+}
+.verify-card {
+  background: #f5f2ed;
+  border-radius: 14px;
+  padding: 22px 20px;
+}
+.vc-step {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+.vc-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.vc-loc {
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.vc-desc {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.55;
+}
+
+/* 피처 리스트 */
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.feature-list li {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.55;
+}
+.feature-list li::before {
+  content: '—';
+  color: #bbb;
+  flex-shrink: 0;
+}
+
+/* 증언 / 소비자 리뷰 블록 */
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+@media (max-width: 600px) {
+  .quote-grid { grid-template-columns: 1fr; }
+}
+.quote-card {
+  background: #f5f2ed;
+  border-radius: 14px;
+  padding: 20px;
+}
+.qc-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.qc-source {
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 0.04em;
+}
+
+/* 특허 배지 */
+.patent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0ede8;
+  border: 1px solid #e0dbd4;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 12px;
+}
+.patent-badge strong {
+  color: #111;
+  font-weight: 700;
+}
+
+/* 섹션 구분선 */
+.tech-divider {
+  height: 1px;
+  background: #e8e4df;
+  margin: 0 24px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 5 팩터 */
+.factor-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+@media (max-width: 700px) {
+  .factor-row { grid-template-columns: repeat(2, 1fr); }
+}
+.factor-card {
+  background: #f5f2ed;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+}
+.fc-icon { font-size: 20px; margin-bottom: 8px; }
+.fc-name { font-size: 12px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.fc-desc { font-size: 11px; color: #888; line-height: 1.4; }
+
+/* 카테고리 뱃지 그리드 */
+.cat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.cat-item {
+  background: #f5f2ed;
+  border-radius: 12px;
+  padding: 14px 18px;
+  flex: 1;
+  min-width: 160px;
+}
+.ci-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.ci-desc { font-size: 12px; color: #777; line-height: 1.45; }
+
+/* 수면 영향 리스트 */
+.sleep-benefits {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+@media (max-width: 600px) {
+  .sleep-benefits { grid-template-columns: 1fr; }
+}
+.sleep-benefits li {
+  background: #f5f2ed;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.sleep-benefits li::before {
+  content: '•';
+  color: #3d5a9e;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Rain senses (Geogaia) */
+.senses-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+@media (max-width: 600px) {
+  .senses-row { grid-template-columns: repeat(2, 1fr); }
+}
+.sense-card {
+  background: #f5f2ed;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+}
+.sense-icon { font-size: 24px; margin-bottom: 8px; }
+.sense-name { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+.sense-desc { font-size: 11px; color: #888; line-height: 1.4; }
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(140deg, #0a1628 0%, #0f2240 100%);
+  padding: 72px 24px;
+  text-align: center;
+}
+.cta-inner { max-width: 600px; margin: 0 auto; }
+.cta-title {
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.cta-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+  transition: background 0.2s, border-color 0.2s;
+}
+.cta-btn:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.35);
+}
+.cta-company {
+  margin-top: 40px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+/* Sticky nav */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+.sticky-nav.visible { transform: translateY(0); }
+.nav-logo {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.05em;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: rgba(255,255,255,0.8); }
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+}
+
+/* Accent colors per tech */
+.accent-viva  { color: #2d7a6a; }
+.accent-scalp { color: #2a8888; }
+.accent-dream { color: #3d5a9e; }
+.accent-zap   { color: #b87520; }
+.accent-geo   { color: #b85a3a; }
+.accent-phyto { color: #3a7a3a; }
+
+/* scroll target highlight */
+@keyframes section-highlight {
+  0%   { box-shadow: inset 0 0 0 3px rgba(45,122,106,0); }
+  20%  { box-shadow: inset 0 0 0 3px rgba(45,122,106,0.45); }
+  100% { box-shadow: inset 0 0 0 3px rgba(45,122,106,0); }
+}
+.section-highlight { animation: section-highlight 2s ease forwards; }
+
+/* source note */
+.source-note {
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SECTION CTA
+   ============================================================ */
+.section-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #ebe8e3;
+}
+.section-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: all 0.18s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.section-cta a.cta-sample {
+  background: #0a1628;
+  color: #fff;
+}
+.section-cta a.cta-sample:hover {
+  background: #162540;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(10,22,40,0.25);
+}
+.section-cta a.cta-doc {
+  background: #fff;
+  color: #0a1628;
+  border: 1.5px solid #c8d0dc;
+}
+.section-cta a.cta-doc:hover {
+  border-color: #0a1628;
+  background: #f5f7fa;
+  transform: translateY(-1px);
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="nav-logo">GIVAUDAN S&T · Ewoo Bio</div>
+  <div class="nav-links">
+    <a href="#viva">VivaScentz</a>
+    <a href="#dream">DreamScentz</a>
+    <a href="#zap">YouZap · FabZap</a>
+    <a href="#phyto">Phytogaia</a>
+    <a href="#geo">Geogaia</a>
+    <a href="#scalp">ScalpSure</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ewoo Bio &nbsp;×&nbsp; Givaudan</div>
+    <div class="hero-tag">Science &amp; Technology Portfolio</div>
+    <h1 class="hero-title">향에 담긴 과학,<br><em>브랜드 스토리를 완성하다</em></h1>
+    <p class="hero-sub">Givaudan의 30년 신경과학 연구를 집약한 6가지 핵심 향료 기술.<br>소비자 임상부터 국제 특허까지, 증명된 클레임으로 제품을 차별화합니다.</p>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      SCROLL
+    </div>
+  </div>
+  <div class="hero-collab">이우바이오 (Ewoo Bio Co., Ltd.) — Givaudan 공식 파트너</div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="overview-inner">
+    <p class="section-label">Givaudan Neuroscience Technologies</p>
+    <h2 class="section-headline">6가지 핵심 기술 한눈에 보기</h2>
+    <p class="section-lead">감각적 만족을 넘어 정서적·행동적 변화까지 이끄는 Givaudan의 검증된 향료 기술 포트폴리오입니다.</p>
+
+    <div class="tech-grid">
+
+      <!-- VivaScentz -->
+      <a href="#viva" class="tech-card">
+        <div class="tc-bg bg-viva" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135973373140156.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(78,203,168,0.25); color:#4ecba8;">♥</div>
+          <div class="tc-cat">Holistic Well-being</div>
+          <div class="tc-name">VivaScentz™</div>
+          <div class="tc-claim">소비자 2,000명 임상 검증 · 웰빙 향료</div>
+        </div>
+      </a>
+
+      <!-- ScalpSure -->
+      <a href="#scalp" class="tech-card">
+        <div class="tc-bg bg-scalp" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135978016562489.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(78,180,200,0.25); color:#4eb4c8;">≋</div>
+          <div class="tc-cat">Specific Benefits · NEW</div>
+          <div class="tc-name">ScalpSure™</div>
+          <div class="tc-claim">3국 교차 임상 · 두피 향 지속 기술</div>
+        </div>
+      </a>
+
+      <!-- DreamScentz -->
+      <a href="#dream" class="tech-card">
+        <div class="tc-bg bg-dream" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135982416362984.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(120,140,230,0.25); color:#8090e6;">☾</div>
+          <div class="tc-cat">Behavioural Well-being</div>
+          <div class="tc-name">DreamScentz®</div>
+          <div class="tc-claim">EEG 수면다원검사 기반 임상 검증 향료</div>
+        </div>
+      </a>
+
+      <!-- YouZap · FabZap -->
+      <a href="#zap" class="tech-card">
+        <div class="tc-bg bg-zap" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135986692225609.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(220,170,80,0.25); color:#dca850;">≈</div>
+          <div class="tc-cat">Specific Benefits</div>
+          <div class="tc-name">YouZap® · FabZap®</div>
+          <div class="tc-claim">WIPO 특허 출원 · 악취 마스킹 기술</div>
+        </div>
+      </a>
+
+      <!-- Geogaia -->
+      <a href="#geo" class="tech-card">
+        <div class="tc-bg bg-geo" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135991819525160.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(220,140,90,0.25); color:#dc8a5a;">⛆</div>
+          <div class="tc-cat">Naturality · NEW</div>
+          <div class="tc-name">Geogaia™</div>
+          <div class="tc-claim">페트리커 재해석 · 이완·스트레스 해소 검증</div>
+        </div>
+      </a>
+
+      <!-- Phytogaia -->
+      <a href="#phyto" class="tech-card">
+        <div class="tc-bg bg-phyto" style="background-image:url('https://img2.stibee.com/125075_3652427_1792135995984591091.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="tc-overlay"></div>
+        <span class="tc-arrow">↓</span>
+        <div class="tc-body">
+          <div class="tc-dot" style="background:rgba(100,200,100,0.2); color:#64c864;">❧</div>
+          <div class="tc-cat">Holistic Well-being</div>
+          <div class="tc-name">Phytogaia®</div>
+          <div class="tc-claim">WIPO 인증 피톤치드 기반 진정·힐링</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECH MAP -->
+<section class="map-section">
+  <div class="map-inner">
+    <p class="map-label">Technology Map</p>
+    <h2 class="map-title">웰빙 여정: Sensorial → Emotional → Behavioural</h2>
+    <p class="map-sub">Givaudan의 웰빙 기술은 감각적 만족을 넘어 소비자의 감정과 행동 변화까지 이끄는 단계로 발전합니다.</p>
+    <div class="map-stages">
+      <div class="map-stage ms-1">
+        <div class="map-num">1</div>
+        <div class="map-stage-title">Sensorial</div>
+        <div class="map-stage-sub">향·플레이버 자체의<br>관능적 만족 설계</div>
+        <div class="map-chips">
+          <span class="map-chip">Sensorial Testing</span>
+        </div>
+      </div>
+      <div class="map-stage ms-2">
+        <div class="map-num">2</div>
+        <div class="map-stage-title">Emotional</div>
+        <div class="map-stage-sub">긍정적 무드를<br>이끄는 향 설계</div>
+        <div class="map-chips">
+          <span class="map-chip">MoodScentz</span>
+          <span class="map-chip">Geogaia™</span>
+        </div>
+      </div>
+      <div class="map-stage ms-3">
+        <div class="map-num">3</div>
+        <div class="map-stage-title">Behavioural</div>
+        <div class="map-stage-sub">행동 변화까지<br>유도하는 웰빙 기술</div>
+        <div class="map-chips">
+          <span class="map-chip">VivaScentz™</span>
+          <span class="map-chip">DreamScentz®</span>
+        </div>
+      </div>
+    </div>
+    <div class="map-footer">
+      Holistic 총체적 웰빙: VivaScentz™ · Phytogaia® &nbsp;|&nbsp; Specific 특정 기능: DreamScentz® · YouZap® · FabZap® · ScalpSure™ &nbsp;|&nbsp; Naturality 자연 감성: Geogaia™
+    </div>
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     1. VIVASCENTZ
+     ============================================================ -->
+<section id="viva">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#e8f5f1; color:#2d7a6a;">Holistic Well-being · 웰빙 향료</span>
+        <div class="th-name accent-viva">VivaScentz™</div>
+        <div class="th-tagline">Live Life Well — 웰빙을 향으로 증명하다</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          소비자의 91%는 웰빙 효과를 내세우는 제품이라면 구매하고 싶다고 답했습니다. VivaScentz™는 이런 니즈에 맞춰, 향과 플레이버가 실제로 소비자의 심리적·신체적·사회적 웰빙에 긍정적인 영향을 주는지 과학적으로 검증하는 Givaudan 최초의 기술입니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 지표 -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value accent-viva">91%</div>
+        <div class="stat-label">웰빙 강조 제품<br>구매 의향</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-viva">2,000+</div>
+        <div class="stat-label">검증에 참여한<br>소비자 수</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-viva">2건</div>
+        <div class="stat-label">출원된 특허<br>(향료·구강케어)</div>
+      </div>
+    </div>
+
+    <!-- 5 웰빙 팩터 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">5가지 웰빙 팩터</p>
+    <div class="factor-row">
+      <div class="factor-card">
+        <div class="fc-icon">😌</div>
+        <div class="fc-name">Low Negativity</div>
+        <div class="fc-desc">불안·스트레스 감소</div>
+      </div>
+      <div class="factor-card">
+        <div class="fc-icon">😊</div>
+        <div class="fc-name">Positivity</div>
+        <div class="fc-desc">행복·의욕 증진</div>
+      </div>
+      <div class="factor-card">
+        <div class="fc-icon">🎯</div>
+        <div class="fc-name">Engagement</div>
+        <div class="fc-desc">몰입도 향상</div>
+      </div>
+      <div class="factor-card">
+        <div class="fc-icon">⚡</div>
+        <div class="fc-name">Mental Vitality</div>
+        <div class="fc-desc">정신적 활력</div>
+      </div>
+      <div class="factor-card">
+        <div class="fc-icon">🌿</div>
+        <div class="fc-name">Positive Deactivation</div>
+        <div class="fc-desc">안정·이완</div>
+      </div>
+    </div>
+
+    <!-- 실증 연구 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">실증 연구 결과</p>
+    <div class="verify-row">
+      <div class="verify-card">
+        <div class="vc-step">Study 1</div>
+        <div class="vc-title">690명 가정 내 향 테스트</div>
+        <div class="vc-desc">4일간 가정 사용 테스트 — 20종 향료 비교 검증</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Study 2</div>
+        <div class="vc-title">90명 섬유유연제 테스트</div>
+        <div class="vc-desc">8주 섬유유연제 사용 — 세탁 전 단계 웰빙 점수 검증</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Study 3</div>
+        <div class="vc-title">539명 구강케어 테스트</div>
+        <div class="vc-desc">3제품 비교 — 15종 플레이버 중 7종이 유의미한 웰빙 향상 확인</div>
+      </div>
+    </div>
+
+    <!-- 카테고리 적용 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">카테고리별 적용 방향</p>
+    <div class="cat-grid">
+      <div class="cat-item">
+        <div class="ci-name">스킨케어 · 퍼스널워시</div>
+        <div class="ci-desc">피부 케어와 함께 웰빙 감각을 전달</div>
+      </div>
+      <div class="cat-item">
+        <div class="ci-name">헤어케어</div>
+        <div class="ci-desc">매일의 헤어 루틴에 웰빙을 더함</div>
+      </div>
+      <div class="cat-item">
+        <div class="ci-name">홈케어 · 에어케어</div>
+        <div class="ci-desc">공간을 채우는 웰빙 향으로 확장</div>
+      </div>
+      <div class="cat-item">
+        <div class="ci-name">패브릭케어</div>
+        <div class="ci-desc">세탁물에 남는 지속적 웰빙 향</div>
+      </div>
+      <div class="cat-item">
+        <div class="ci-name">구강케어</div>
+        <div class="ci-desc">매일의 브러싱에 균형과 평온함을 더함</div>
+      </div>
+      <div class="cat-item">
+        <div class="ci-name">파인프래그런스</div>
+        <div class="ci-desc">일상 속 자기돌봄의 순간 강화</div>
+      </div>
+    </div>
+
+    <p class="source-note">출처: G-Source Well-being Study (2019) · Bristol University 협업 연구 · G-Source Well-being Concept &amp; Benefits Survey (2020, 미국 18-54세 317명)</p>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=VivaScentz&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=VivaScentz&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     2. DREAMSCENTZ
+     ============================================================ -->
+<section id="dream">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#e8edf8; color:#3d5a9e;">Behavioural Well-being · 수면 향료</span>
+        <div class="th-name accent-dream">DreamScentz®</div>
+        <div class="th-tagline">By the brain, for the brain — 과학으로 증명한 수면 향</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          소비자의 80%는 수면의 질에 완전히 만족하지 못하며, 65%는 하루 8시간 미만으로 잠을 잡니다. 명상, 아로마테라피, 커넥티드 슬립 트래커가 확산되는 가운데, DreamScentz®는 향의 힘으로 수면 문제에 접근하는 Givaudan의 독자적 솔루션입니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 지표 -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value accent-dream">80%</div>
+        <div class="stat-label">수면의 질에<br>불만족하는 소비자</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-dream">65%</div>
+        <div class="stat-label">하루 8시간 미만<br>수면하는 소비자</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-dream">50%</div>
+        <div class="stat-label">충분히 자지 못한다고<br>응답한 소비자</div>
+      </div>
+    </div>
+
+    <!-- 수면이 회복시키는 것 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">수면이 회복시키는 것</p>
+    <ul class="sleep-benefits">
+      <li>기억력 강화 — 신경 연결 회복</li>
+      <li>심혈관 건강 — 콜레스테롤·중성지방 개선</li>
+      <li>우울감 감소 — 스트레스 호르몬 배출</li>
+      <li>창의력 증진 — 균형 잡힌 정신 상태</li>
+      <li>체중 관리 — 식욕 호르몬 균형</li>
+      <li>면역력 강화 — 다음날을 위한 회복력</li>
+    </ul>
+
+    <!-- 임상 검증 방법론 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">임상 검증 방법론</p>
+    <div class="verify-row">
+      <div class="verify-card">
+        <div class="vc-step">Method 1</div>
+        <div class="vc-title">Polysomnography (PSG)</div>
+        <div class="vc-desc">뇌파(EEG)를 포함한 임상 수면다원검사로 향에 대한 수면 단계별 반응을 정밀 측정</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Method 2</div>
+        <div class="vc-title">Actigraphy</div>
+        <div class="vc-desc">Philips Actiwatch®를 활용한 신체 움직임 기반 수면 측정 — PSG 데이터와의 상관 검증에 사용</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Method 3</div>
+        <div class="vc-title">Sandman Classifier</div>
+        <div class="vc-desc">향에 대한 EEG 반응을 수면 개선 효과 기준으로 분류하는 Givaudan 독자 지표</div>
+      </div>
+    </div>
+
+    <!-- 실증 결과 + 특허 -->
+    <div class="content-block">
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#e8edf8; color:#3d5a9e;">✓</div>
+          실증 프로토콜 결과
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li>참가자들은 라탄스틱 디퓨저로 1주는 수면 향, 1주는 무향 대조군 사용</li>
+            <li>매일 수면일지 작성 + Actiwatch® 데이터 교차 검증</li>
+            <li>향 사용 시 체감 수면의 질과 Actiwatch 수면 점수 모두 유의미하게 개선</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#e8edf8; color:#3d5a9e;">⚖</div>
+          국제 특허
+        </div>
+        <div class="cc-body">
+          <div class="patent-badge">
+            <strong>WO 2016/146673 A1</strong>
+          </div>
+          <div style="font-size:13px; color:#555; line-height:1.65;">수면의 질을 향상시키는 향료 조성물. Sandman Classifier(SC) 값 1.35 이상을 만족하는 2종 이상의 향료 성분 조합에 대한 국제 특허</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="source-note">출처: G-Source 미국·영국 소비자 조사 (2016)</p>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=DreamScentz&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=DreamScentz&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     3. YOUZAP · FABZAP
+     ============================================================ -->
+<section id="zap">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#fdf5e6; color:#b87520;">Specific Benefits · 악취 마스킹</span>
+        <div class="th-name accent-zap">YouZap® · FabZap®</div>
+        <div class="th-tagline">체취와 섬유의 악취를 마스킹하는 Zap Solution</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          영국 Ashford의 Givaudan Well-being Center에서 개발한 Zap Solution은 악취를 가리고 향의 지속력을 높이는 기술로, WIPO에 특허 출원되어 보호받고 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#fdf5e6; color:#b87520;">👤</div>
+          YouZap® — 체취 마스킹
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li><strong>목적</strong>: 향으로 체취를 가려 자존감과 삶의 만족도를 높임</li>
+            <li><strong>마케팅 효과</strong>: 체취 고민 해결 + 상품 관심도 증가, 쾌적한 향으로 삶의 질 향상</li>
+            <li><strong>적용 카테고리</strong>: Hair Care · Body Care · Fabric Care</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#fdf5e6; color:#b87520;">👔</div>
+          FabZap® — 섬유·에어케어 악취 마스킹
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li><strong>목적</strong>: 섬유·에어케어 제품의 땀 냄새 및 외부 악취 마스킹</li>
+            <li><strong>마케팅 효과</strong>: 옷·공간의 냄새로 인한 불편함 해소, 세탁·탈취 효과 동반</li>
+            <li><strong>적용 카테고리</strong>: Fabric Care · Air Care</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="patent-badge">
+      <strong>WIPO 특허 출원</strong>&nbsp;·&nbsp;Givaudan Well-being Center 개발
+    </div>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=YouZap-FabZap&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=YouZap-FabZap&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     4. PHYTOGAIA
+     ============================================================ -->
+<section id="phyto">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#eaf4ea; color:#3a7a3a;">Holistic Well-being · 피톤치드</span>
+        <div class="th-name accent-phyto">Phytogaia®</div>
+        <div class="th-tagline">피톤치드가 선사하는 진정과 힐링</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          Phytocide 성분(피톤치드, 최소 함량 100ppm)을 향료 개발에 반영해 휴식과 스트레스 관리 효과를 주는 어코드입니다. WIPO 기술 준수 인증서로 검증받았으며, VivaScentz™와 함께 '총체적 웰빙'을 지향하는 기술로 포지셔닝됩니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#eaf4ea; color:#3a7a3a;">🌲</div>
+          원리 및 구성
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li>Accords · Phytocide ingredients — 피톤치드 연관 성분 최소 100ppm 함유</li>
+            <li>휴식의 편안함 제공을 통한 스트레스 관리</li>
+            <li>스트레스 감소, 진정, 힐링, 심리적 행복지수 향상</li>
+            <li><strong>적용 범위</strong>: All Categories — 전 카테고리 적용 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#eaf4ea; color:#3a7a3a;">📄</div>
+          WIPO 기술 준수 인증서
+        </div>
+        <div class="cc-body" style="font-size:13px; color:#555; line-height:1.65;">
+          세계지식재산권기구(WIPO) 기준에 따른 기술 준수 인증서를 제출 서류와 함께 받아보실 수 있습니다.<br><br>
+          Phytogaia®는 Givaudan의 Holistic 웰빙 포트폴리오 중 하나로, VivaScentz™와 함께 '총체적 웰빙'을 지향하는 기술로 포지셔닝됩니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=Phytogaia&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=Phytogaia&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     5. GEOGAIA
+     ============================================================ -->
+<section id="geo">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#fdf0ec; color:#b85a3a;">Naturality · NEW</span>
+        <div class="th-name accent-geo">Geogaia™</div>
+        <div class="th-tagline">Recreating the scent after the rain</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          건조한 땅에 비가 내릴 때 나는 흙냄새를 Petrichor(페트리커)라 부릅니다. Givaudan은 Petrichor와 조향 원료 사이의 연결고리를 밝혀내고, Geosmin 비율을 조정해 페트리커의 부정적 요소는 줄이고 긍정적 정서만 이끌어내는 Geogaia 어코드를 개발했습니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 비의 4가지 감각 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">비는 4가지 감각을 동시에 자극합니다</p>
+    <div class="senses-row">
+      <div class="sense-card">
+        <div class="sense-icon">🤚</div>
+        <div class="sense-name">촉각</div>
+        <div class="sense-desc">피부에 스치는 빗방울의 산뜻한 감촉</div>
+      </div>
+      <div class="sense-card">
+        <div class="sense-icon">👁</div>
+        <div class="sense-name">시각</div>
+        <div class="sense-desc">빗방울이 그리는 자연의 아트워크</div>
+      </div>
+      <div class="sense-card">
+        <div class="sense-icon">👂</div>
+        <div class="sense-name">청각</div>
+        <div class="sense-desc">일정한 리듬의 빗소리 — 알파파 유도로 안정감</div>
+      </div>
+      <div class="sense-card">
+        <div class="sense-icon">👃</div>
+        <div class="sense-name">후각</div>
+        <div class="sense-desc">청량하면서도 편안한 흙냄새 특유의 향</div>
+      </div>
+    </div>
+
+    <!-- 포지셔닝 + 검증 정서 -->
+    <div class="content-block">
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#fdf0ec; color:#b85a3a;">🌍</div>
+          포지셔닝
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li>지속가능한 지구 (Sustainable Planet)</li>
+            <li>천연 유래 (Natural Origin)</li>
+            <li>전 카테고리 · 전 올팩티브 계열에 최소 100ppm으로 적용 가능</li>
+            <li>Certificate of Compliance 제공</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#fdf0ec; color:#b85a3a;">✨</div>
+          검증된 정서 영역
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li>Relaxation — 이완</li>
+            <li>Happy — 행복</li>
+            <li>Playfulness — 경쾌함</li>
+            <li>Spirituality — 영적 충만감</li>
+            <li>De-stress — 스트레스 해소</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 소비자 목소리 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">소비자 목소리 — 2023 UK Sniff Test</p>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <div class="qc-text">"달콤하고 깨끗하고 상쾌한, 살짝 흙내음. 어릴 적 쓰던 향수가 떠올라요. 소나무 잎 향. 행복하고 편안해져요."</div>
+        <div class="qc-source">UK 소비자, Geogaia Sniff Test 2023</div>
+      </div>
+      <div class="quote-card">
+        <div class="qc-text">"신선한 흙냄새. 정원에서 식물을 키울 때 나는 냄새 — 퇴비 특유의 풍부한 흙 향. 신선하고 깨끗해요."</div>
+        <div class="qc-source">UK 소비자, Geogaia Sniff Test 2023</div>
+      </div>
+      <div class="quote-card">
+        <div class="qc-text">"은은한 꽃향, 살짝 흙내음과 우디함. 뉴질랜드에서 비 온 뒤 숲길을 걷던 기억이 나요. 과하지 않아 좋아요."</div>
+        <div class="qc-source">UK 소비자, Geogaia Sniff Test 2023</div>
+      </div>
+      <div class="quote-card">
+        <div class="qc-text">"매우 흙 내음이 강해요. 크리스마스 시즌 여행길에서 맡던 향, 아늑한 밤에 켜고 싶은 캔들이에요."</div>
+        <div class="qc-source">UK 소비자, Geogaia Sniff Test 2023</div>
+      </div>
+    </div>
+
+    <div style="background:#f5f2ed; border-radius:14px; padding:16px 20px; font-size:13px; color:#555; line-height:1.65; margin-bottom:12px;">
+      <strong>Insight:</strong> 소비자들은 '흙냄새(earthy)'를 부정적 악취가 아닌 신선함·행복·안정감과 연결지어 인식했습니다 — Geogaia™의 핵심 가설을 뒷받침하는 결과입니다.
+    </div>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=Geogaia&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=Geogaia&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="tech-divider"></div>
+
+<!-- ============================================================
+     6. SCALPSURE
+     ============================================================ -->
+<section id="scalp">
+  <div class="tech-section">
+
+    <div class="tech-header">
+      <div class="th-left">
+        <span class="th-cat" style="background:#e6f4f4; color:#2a8888;">Specific Benefits · NEW · 두피케어</span>
+        <div class="th-name accent-scalp">ScalpSure™</div>
+        <div class="th-tagline">두피 냄새를 뿌리부터 잡는 향료 기술</div>
+      </div>
+      <div class="th-right">
+        <div class="th-summary">
+          전 세계 소비자의 95%가 두피에서 나는 냄새를 걱정합니다. 아시아에서 시작된 스캘프케어 트렌드는 전 세계로 확산되고 있으며, 특히 세정 직후보다 하루 종일·다음날·두건을 벗을 때처럼 특정 순간에 향이 오래가지 않는다는 점이 핵심 불만 요인입니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 지표 -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value accent-scalp">95%</div>
+        <div class="stat-label">전 세계 두피 냄새<br>우려 소비자 비율</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-scalp">8.1%</div>
+        <div class="stat-label">스캘프케어 언급<br>침투율 (2021)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent-scalp">3</div>
+        <div class="stat-label">향 지속력이 부족한<br>핵심 불만 순간</div>
+      </div>
+    </div>
+
+    <!-- 핵심 편익 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">ScalpSure™ 핵심 편익</p>
+    <ul class="feature-list" style="margin-bottom:32px;">
+      <li>악취 예방 &amp; 프레시함 — 하루 종일 지속되는 상쾌함</li>
+      <li>효과적 중화 — 땀 냄새를 근본적으로 마스킹</li>
+      <li>향기로운 사용 경험 — 자신감과 삶의 만족도 향상</li>
+    </ul>
+
+    <!-- 3단계 교차지역 검증 -->
+    <p style="font-size:13px; font-weight:700; color:#111; margin-bottom:14px;">3단계 교차지역 검증</p>
+    <div class="verify-row">
+      <div class="verify-card">
+        <div class="vc-step">Stage 1</div>
+        <div class="vc-title">Sensory Panel Validation</div>
+        <div class="vc-loc">🇬🇧 UK · 🇸🇬 Singapore</div>
+        <div class="vc-desc">조향 전문가로 구성된 감각 패널이 악취 마스킹 효과를 1차 검증</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Stage 2</div>
+        <div class="vc-title">In-vivo Expert Evaluation</div>
+        <div class="vc-loc">🇸🇬 Singapore · 🇫🇷 France</div>
+        <div class="vc-desc">전문가가 실제 사용자에게 적용해 생체 조건에서 효과를 평가</div>
+      </div>
+      <div class="verify-card">
+        <div class="vc-step">Stage 3</div>
+        <div class="vc-title">Consumer Home-use Test</div>
+        <div class="vc-loc">🇮🇩 Indonesia · 🇵🇭 Philippines</div>
+        <div class="vc-desc">실사용 소비자 가정에서 장기간 사용성과 만족도를 검증</div>
+      </div>
+    </div>
+
+    <!-- 검증 결과 + 특허 -->
+    <div class="content-block">
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#e6f4f4; color:#2a8888;">✓</div>
+          검증 결과 요약
+        </div>
+        <div class="cc-body">
+          <ul class="feature-list">
+            <li>전 세계 소비자의 95%가 두피 냄새를 걱정한다고 응답</li>
+            <li>감각 패널 · 전문가 · 소비자 3단계에서 일관되게 악취 마스킹 효과 확인</li>
+            <li>세정 직후뿐만 아니라 하루 종일 · 다음날까지 향 지속력과 만족도 개선</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="cc-title">
+          <div class="cc-icon" style="background:#e6f4f4; color:#2a8888;">⚖</div>
+          특허 출원 · 기술 준수 인증서
+        </div>
+        <div class="cc-body" style="font-size:13px; color:#555; line-height:1.65;">
+          ScalpSure™ 기술은 특허 출원 중이며, Givaudan 고유의 알고리즘 기반 향료 설계로 보호받고 있습니다.<br><br>
+          Technology Certificate of Compliance도 받아보실 수 있어 규제·품질 검토에 활용 가능합니다.
+        </div>
+      </div>
+    </div>
+
+    <p class="source-note">출처: Givaudan Project Reveal (2016) · WGSN Trend Curve (2021)</p>
+
+    <div class="section-cta">
+      <a class="cta-sample" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=ScalpSure&type=샘플+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        샘플 요청
+      </a>
+      <a class="cta-doc" href="https://ewoobio.github.io/contact/?utm_source=landing&utm_medium=web&utm_campaign=givaudan-st&product=ScalpSure&type=견적+요청" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6M9 2l4 4M9 2v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        추가 자료 요청
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE -->
+<section style="background:#f5f2ed; padding:48px 24px;">
+  <div style="max-width:1080px; margin:0 auto;">
+    <div style="display:flex; align-items:flex-start; gap:20px; background:#fff; border-radius:16px; padding:28px 32px; border:1px solid #e8e4df;">
+      <div style="flex-shrink:0; width:44px; height:44px; background:#0a1628; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L12.2 7.4L18 8.2L13.9 12.1L15 18L10 15.3L5 18L6.1 12.1L2 8.2L7.8 7.4L10 2Z" stroke="white" stroke-width="1.4" fill="none"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#999; margin-bottom:8px;">Certificate of Technology</div>
+        <div style="font-size:17px; font-weight:800; color:#111; margin-bottom:10px; letter-spacing:-0.01em;">기술 적용 인증서 발행</div>
+        <div style="font-size:14px; color:#555; line-height:1.7;">Givaudan S&amp;T 기술을 적용한 제품에 대해 <strong>Certificate of Technology Compliance</strong>를 발행합니다. 국제 특허 준수 여부를 공식 확인하는 문서로, 제품 신뢰도 강화 및 B2B 커뮤니케이션에 활용 가능합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <h2 class="cta-title">향의 과학이 만드는<br>브랜드의 다음 이야기</h2>
+    <p class="cta-sub">상세 기술 자료, 샘플, 클레임 설계 컨설팅은<br>이우바이오 담당자에게 문의해 주세요.</p>
+    <a href="mailto:contact@ewoobio.com" class="cta-btn">문의하기 →</a>
+    <div class="cta-company">이우바이오 (Ewoo Bio Co., Ltd.) &nbsp;|&nbsp; Givaudan 공식 파트너</div>
+  </div>
+</section>
+
+<script>
+// Sticky nav on scroll
+const nav = document.getElementById('stickyNav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.6) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+});
+
+// ── ?section= 파라미터로 해당 섹션 스크롤 (이메일 클라이언트 해시 우회) ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const section = params.get('section');
+  if (!section) return;
+  const target = document.getElementById(section);
+  if (!target) return;
+  // 페이지 로드 후 스크롤 (헤더 높이 보정)
+  const HEADER_OFFSET = 64;
+  const doScroll = () => {
+    const top = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+    window.scrollTo({ top, behavior: 'smooth' });
+    target.classList.add('section-highlight');
+  };
+  if (document.readyState === 'complete') {
+    setTimeout(doScroll, 100);
+  } else {
+    window.addEventListener('load', () => setTimeout(doScroll, 100));
+  }
+})();
+</script>
+</body>
+</html>
